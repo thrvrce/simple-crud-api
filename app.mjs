@@ -1,6 +1,9 @@
 import express from 'express';
 import personRouter from './src/resources/person/person.router.mjs';
 import createHttpError from './src/utils/createHttpError.mjs'
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 const app = express();
 
@@ -26,7 +29,7 @@ app.use((err, req, res, next) => {
   res.json({message: err.message});
 });
 
-const PORT = 3000
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () =>
   console.log(`App is running on http://localhost:${PORT}`)
 );
