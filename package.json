@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start:dev": "nodemon app.mjs",
-    "start:prod": "node app.mjs"
+    "start:prod": "node app.mjs",
+    "lint": "eslint *mjs ./src/**/*.mjs --fix"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
@@ -9,6 +10,9 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
     "nodemon": "^2.0.15"
   }
 }

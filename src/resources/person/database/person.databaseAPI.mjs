@@ -5,6 +5,6 @@ const getPersonById = (id) => personsDataBase.filter((person) => person.id === i
 
 const personsDatabaseApi = {
   getAllPersons,
-  getPersonById
-}
+  getPersonById,
+};
 export default personsDatabaseApi;

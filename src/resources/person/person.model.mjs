@@ -1,4 +1,4 @@
-import  {v4 as uuidV4, validate } from 'uuid';
+import { v4 as uuidV4, validate } from 'uuid';
 
 class Person {
   constructor(name, age, hobbies) {
@@ -8,7 +8,7 @@ class Person {
     this.hobbies = hobbies;
   }
 
-  static isIdValid (id) {
+  static isIdValid(id) {
     return validate(id);
   }
 }
