@@ -60,5 +60,5 @@ export const deletePersonById = (id) => {
     return { statusCode: 404, payload: { message: 'person with given uuid was not found' } };
   }
 
-  return { statusCode: 200, payload: { message: `Person with id ${id} was deleted` } };
+  return { statusCode: 204, payload: { message: `Person with id ${id} was deleted` } };
 };
