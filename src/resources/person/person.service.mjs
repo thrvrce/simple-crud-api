@@ -42,3 +42,23 @@ export const patchPersonById = (id, newData) => {
 
   return { statusCode: 200, payload: { person } };
 };
+
+export const deletePersonById = (id) => {
+  if (!Person.isIdValid(id)) {
+    return { statusCode: 400, payload: { message: 'uuid is invalid' } };
+  }
+
+  const person = personsDatabaseApi.getPersonById(id);
+
+  if (!person) {
+    return { statusCode: 404, payload: { message: 'person with given uuid was not found' } };
+  }
+
+  const result = personsDatabaseApi.deletePersonById(id);
+
+  if (!result) {
+    return { statusCode: 404, payload: { message: 'person with given uuid was not found' } };
+  }
+
+  return { statusCode: 200, payload: { message: `Person with id ${id} was deleted` } };
+};

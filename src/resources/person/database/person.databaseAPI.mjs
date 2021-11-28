@@ -11,11 +11,22 @@ const patchPersonById = (id, updatedPerson) => {
   personsDataBase[personsIndex] = updatedPerson;
 };
 
+const deletePersonById = (id) => {
+  const personsIndex = personsDataBase.findIndex((person) => person.id === id);
+  if (personsIndex !== -1) {
+    personsDataBase.splice(personsIndex, 1);
+    return true;
+  }
+
+  return false;
+};
+
 const personsDatabaseApi = {
   getAllPersons,
   getPersonById,
   insertNewPerson,
   patchPersonById,
+  deletePersonById,
 };
 
 export default personsDatabaseApi;
