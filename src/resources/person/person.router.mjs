@@ -1,5 +1,7 @@
 import { Router } from 'express';
-import { getAllPersons, getPersonById, createNewPerson } from './person.service.mjs';
+import {
+  getAllPersons, getPersonById, createNewPerson, patchPersonById,
+} from './person.service.mjs';
 import createHttpError from '../../utils/createHttpError.mjs';
 
 const personRouter = Router({ mergeParams: true });
@@ -27,6 +29,16 @@ personRouter.get('/:personId', async (req, res, next) => {
 personRouter.post('/', async (req, res, next) => {
   try {
     const { statusCode, payload } = createNewPerson(req.body);
+    res.status(statusCode);
+    res.json(payload);
+  } catch (err) {
+    next(createHttpError(500, 'Internal Server Error'));
+  }
+});
+
+personRouter.put('/:personId', async (req, res, next) => {
+  try {
+    const { statusCode, payload } = patchPersonById(req.params.personId, req.body);
     res.status(statusCode);
     res.json(payload);
   } catch (err) {

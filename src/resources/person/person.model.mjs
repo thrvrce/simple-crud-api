@@ -2,7 +2,7 @@ import { v4 as uuidV4, validate } from 'uuid';
 import isNOtNullish from '../../utils/checkers.mjs';
 
 class Person {
-  constructor(name, age, hobbies) {
+  constructor({ name, age, hobbies }) {
     this.id = uuidV4();
     this.name = name;
     this.age = age;
