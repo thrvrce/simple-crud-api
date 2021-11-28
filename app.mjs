@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   next(createHttpError(404, 'Page not found'));
 });
 
-app.use((err, req, res) => {
+app.use((err, req, res, _next) => {
   res.status(err.status);
   res.json({ message: err.message });
 });
