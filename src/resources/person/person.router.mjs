@@ -1,58 +1,40 @@
-import { Router } from 'express';
 import {
   getAllPersons, getPersonById, createNewPerson, patchPersonById, deletePersonById,
 } from './person.service.mjs';
-import createHttpError from '../../utils/createHttpError.mjs';
+import { getRequestUrlSegments } from '../../utils/request.utils.mjs';
 
-const personRouter = Router({ mergeParams: true });
+const personRouter = (req, res) => {
+  const reqUrlSegments = getRequestUrlSegments(req.url);
+  const personId = reqUrlSegments[1];
+  let result;
 
-personRouter.get('/', async (req, res, next) => {
-  try {
-    const { statusCode, payload } = getAllPersons();
-    res.status(statusCode);
-    res.json(payload);
-  } catch (err) {
-    next(createHttpError(500, 'Internal Server Error'));
+  if (personId) {
+    if (req.method === 'GET') {
+      result = getPersonById(personId);
+    } else
+    if (req.method === 'PUT') {
+      result = patchPersonById(personId, req.body);
+    } else
+    if (req.method === 'DELETE') {
+      result = deletePersonById(personId);
+    }
+  } else if (reqUrlSegments.length === 1) {
+    if (req.method === 'GET') {
+      result = getAllPersons();
+    } else
+    if (req.method === 'POST') {
+      result = createNewPerson(req.body);
+    }
   }
-});
 
-personRouter.get('/:personId', async (req, res, next) => {
-  try {
-    const { statusCode, payload } = getPersonById(req.params.personId);
-    res.status(statusCode);
-    res.json(payload);
-  } catch (err) {
-    next(createHttpError(500, 'Internal Server Error'));
+  if (result) {
+    const { statusCode, payload } = result;
+    res.writeHead(statusCode, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(payload));
+    return true;
   }
-});
 
-personRouter.post('/', async (req, res, next) => {
-  try {
-    const { statusCode, payload } = createNewPerson(req.body);
-    res.status(statusCode);
-    res.json(payload);
-  } catch (err) {
-    next(createHttpError(500, 'Internal Server Error'));
-  }
-});
+  return false;
+};
 
-personRouter.put('/:personId', async (req, res, next) => {
-  try {
-    const { statusCode, payload } = patchPersonById(req.params.personId, req.body);
-    res.status(statusCode);
-    res.json(payload);
-  } catch (err) {
-    next(createHttpError(500, 'Internal Server Error'));
-  }
-});
-
-personRouter.delete('/:personId', async (req, res, next) => {
-  try {
-    const { statusCode, payload } = deletePersonById(req.params.personId);
-    res.status(statusCode);
-    res.json(payload);
-  } catch (err) {
-    next(createHttpError(500, 'Internal Server Error'));
-  }
-});
 export default personRouter;
