@@ -1,7 +1,7 @@
 import {
   getAllPersons, getPersonById, createNewPerson, patchPersonById, deletePersonById,
-} from './person.service.mjs';
-import { getRequestUrlSegments } from '../../utils/request.utils.mjs';
+} from './person.service.js';
+import { getRequestUrlSegments } from '../../utils/request.utils.js';
 
 const personRouter = (req, res) => {
   const reqUrlSegments = getRequestUrlSegments(req.url);

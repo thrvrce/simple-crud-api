@@ -1,4 +1,4 @@
-import personsDataBase from './persons.database.mjs';
+import personsDataBase from './persons.database.js';
 
 const getAllPersons = () => personsDataBase;
 

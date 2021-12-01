@@ -1,9 +1,9 @@
 import http from 'http';
 import dotenv from 'dotenv';
-import { getRequestBody, getRequestUrlSegments } from './src/utils/request.utils.mjs';
-import createHttpError from './src/utils/createHttpError.mjs';
-import personRouter from './src/resources/person/person.router.mjs';
-import ROUTES from './src/resources/consts/routes.mjs';
+import { getRequestBody, getRequestUrlSegments } from './src/utils/request.utils.js';
+import createHttpError from './src/utils/createHttpError.js';
+import personRouter from './src/resources/person/person.router.js';
+import ROUTES from './src/resources/consts/routes.js';
 
 dotenv.config();
 

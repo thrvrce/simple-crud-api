@@ -1,5 +1,5 @@
 import { v4 as uuidV4, validate } from 'uuid';
-import isNOtNullish from '../../utils/checkers.mjs';
+import { isNOtNullish } from '../../utils/checkers.js';
 
 class Person {
   constructor({ name, age, hobbies }) {

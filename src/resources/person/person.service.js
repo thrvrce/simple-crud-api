@@ -1,5 +1,5 @@
-import Person from './person.model.mjs';
-import personsDatabaseApi from './database/person.databaseAPI.mjs';
+import Person from './person.model.js';
+import personsDatabaseApi from './database/person.databaseAPI.js';
 
 export const getAllPersons = () => (
   { statusCode: 200, payload: { persons: personsDatabaseApi.getAllPersons() } });
